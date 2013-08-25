@@ -321,7 +321,11 @@ public class SudokuDatabase {
 				int state = c.getInt(c.getColumnIndex(SudokuColumns.STATE));
 				long time = c.getLong(c.getColumnIndex(SudokuColumns.TIME));
 				String note = c.getString(c.getColumnIndex(SudokuColumns.PUZZLE_NOTE));
-
+				// System.out.println(created);
+				// System.out.println(lastPlayed);
+				System.out.println("this is the state" + state);
+				System.out.println("this is the data"  + data);
+				// System.out.println(note);
 				s = new SudokuGame();
 				s.setId(id);
 				s.setCreated(created);
@@ -440,6 +444,7 @@ public class SudokuDatabase {
 	 */
 	public void updateSudoku(SudokuGame sudoku) {
 		ContentValues values = new ContentValues();
+		System.out.println("updateSudoku" + sudoku.getCells().serialize());
 		values.put(SudokuColumns.DATA, sudoku.getCells().serialize());
 		values.put(SudokuColumns.LAST_PLAYED, sudoku.getLastPlayed());
 		values.put(SudokuColumns.STATE, sudoku.getState());

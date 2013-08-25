@@ -136,7 +136,8 @@ public class SudokuPlayActivity extends Activity {
 			mSudokuGameID = getIntent().getLongExtra(EXTRA_SUDOKU_ID, 0);
 			mSudokuGame = mDatabase.getSudoku(mSudokuGameID);
 		} else {
-			System.out.println("ran before");
+			System.out.println("run before");
+	
 			// activity has been running before, restore its state
 			mSudokuGame = new SudokuGame();
 			mSudokuGame.restoreState(savedInstanceState);
@@ -144,14 +145,12 @@ public class SudokuPlayActivity extends Activity {
 		}
 
 		if (mSudokuGame.getState() == SudokuGame.GAME_STATE_NOT_STARTED) {
-			System.out.println("GAME_STATE_NOT_STARTED");
 			mSudokuGame.start();
 		} else if (mSudokuGame.getState() == SudokuGame.GAME_STATE_PLAYING) {
-			System.out.println("GAME_STATE_PLAYING");
 			mSudokuGame.resume();
 		}
+
 		if (mSudokuGame.getState() == SudokuGame.GAME_STATE_COMPLETED) {
-			System.out.println("GAME_STATE_COMPLETED");
 			mSudokuBoard.setReadOnly(true);
 		}
 
@@ -234,6 +233,7 @@ public class SudokuPlayActivity extends Activity {
 
 	@Override
 	protected void onPause() {
+		System.out.println("onPause");
 		super.onPause();
 
 		// we will save game to the database as we might not be able to get back
@@ -246,6 +246,8 @@ public class SudokuPlayActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
+		System.out.println("onDestroy");
+
 		super.onDestroy();
 
 		mDatabase.close();
